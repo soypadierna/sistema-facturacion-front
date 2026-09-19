@@ -21,7 +21,12 @@ type Options = {
 
 export async function apiFetch<T>(path: string, options: Options = {}): Promise<T> {
   const { method = "GET", body, auth = true } = options;
-  const headers: Record<string, string> = { "Content-Type": "application/json" };
+  const headers: Record<string, string> = {};
+  const isFormData = body instanceof FormData;
+
+  if (!isFormData) {
+    headers["Content-Type"] = "application/json";
+  }
 
   if (auth) {
     const token = getToken();
@@ -33,7 +38,7 @@ export async function apiFetch<T>(path: string, options: Options = {}): Promise<
     res = await fetch(`${import.meta.env.VITE_API_URL}${path}`, {
       method,
       headers,
-      body: body !== undefined ? JSON.stringify(body) : undefined,
+      body: body === undefined ? undefined : isFormData ? (body as FormData) : JSON.stringify(body),
     });
   } catch {
     throw new ApiError(0, "Error de conexión");

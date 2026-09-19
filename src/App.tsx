@@ -1,16 +1,16 @@
-import { AuthProvider, useAuth, type Permission } from '@/context/AuthContext';
 import { AppProvider, useApp } from '@/context/AppContext';
-import { LoginPage } from '@/pages/LoginPage';
-import { Layout } from '@/components/Layout';
-import { DashboardPage } from '@/pages/DashboardPage';
+import { AuthProvider, useAuth, type Permission } from '@/context/AuthContext';
+import { CategoriasPage } from '@/features/categorias/CategoriasPage';
 import { ClientesPage } from '@/pages/ClientesPage';
-import { ProductosPage } from '@/pages/ProductosPage';
-import { CategoriasPage } from '@/pages/CategoriasPage';
+import { CrearAdminPage } from '@/features/usuarios/CrearAdminPage';
+import { DashboardPage } from '@/pages/DashboardPage';
+import { EmpleadosPage } from '@/features/empleados/EmpleadosPage';
 import { FacturasPage } from '@/pages/FacturasPage';
 import { InformesPage } from '@/pages/InformesPage';
-import { EmpleadosPage } from '@/features/empleados/EmpleadosPage';
+import { Layout } from '@/components/Layout';
+import { LoginPage } from '@/pages/LoginPage';
+import { ProductosPage } from '@/features/productos/ProductosPage';
 import { RolesPage } from '@/features/roles/RolesPage';
-import { CrearAdminPage } from '@/features/usuarios/CrearAdminPage';
 import { ToastContainer } from '@/components/ui/Toast';
 
 
