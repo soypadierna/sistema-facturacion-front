@@ -10,7 +10,7 @@ import { FacturasPage } from '@/pages/FacturasPage';
 import { InformesPage } from '@/pages/InformesPage';
 import { EmpleadosPage } from '@/features/empleados/EmpleadosPage';
 import { RolesPage } from '@/features/roles/RolesPage';
-import { CrearAdminPage } from '@/pages/CrearAdminPage';
+import { CrearAdminPage } from '@/features/usuarios/CrearAdminPage';
 import { ToastContainer } from '@/components/ui/Toast';
 
 
