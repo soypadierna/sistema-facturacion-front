@@ -5,7 +5,7 @@ import { ClientesPage } from '@/features/clientes/ClientesPage';
 import { CrearAdminPage } from '@/features/usuarios/CrearAdminPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { EmpleadosPage } from '@/features/empleados/EmpleadosPage';
-import { FacturasPage } from '@/pages/FacturasPage';
+import { FacturasPage } from '@/features/facturas/FacturasPage';
 import { InformesPage } from '@/pages/InformesPage';
 import { Layout } from '@/components/Layout';
 import { LoginPage } from '@/pages/LoginPage';
