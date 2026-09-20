@@ -12,7 +12,7 @@ import { Modal } from '@/components/ui/Modal';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { Table } from '@/components/ui/Table';
 import { showToast } from '@/components/ui/Toast';
-import { Plus, Pencil, UserMinus, RotateCcw, UserCog, Mail, Phone, MapPin, Calendar, IdCard } from 'lucide-react';
+import { Plus, Pencil, UserMinus, RotateCcw, UserCog, Mail, Phone, MapPin, Calendar, IdCard, Search } from 'lucide-react';
 
 function errMsg(e: unknown): string {
   return e instanceof ApiError ? e.message : 'Error de conexión';
@@ -23,6 +23,7 @@ export function EmpleadosPage() {
   const [empleados, setEmpleados] = useState<Empleado[]>([]);
   const [roles, setRoles] = useState<Rol[]>([]);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
   const [incluirRetirados, setIncluirRetirados] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [editing, setEditing] = useState<Empleado | null>(null);
@@ -48,6 +49,12 @@ export function EmpleadosPage() {
   }
 
   useEffect(() => { load(); }, [incluirRetirados]);
+
+  const filtered = empleados.filter((e) =>
+    e.nombre.toLowerCase().includes(search.toLowerCase()) ||
+    (e.email ?? '').toLowerCase().includes(search.toLowerCase()) ||
+    String(e.documento ?? '').includes(search)
+  );
 
   function openNew() {
     setEditing(null);
@@ -140,6 +147,16 @@ export function EmpleadosPage() {
         </div>
       </div>
 
+      <div className="relative max-w-sm">
+        <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+        <input
+          placeholder="Buscar por nombre, email o documento..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full rounded-lg border border-slate-300 bg-white pl-10 pr-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
+        />
+      </div>
+
       {loading ? (
         <div className="flex justify-center py-20">
           <div className="w-8 h-8 border-2 border-slate-300 border-t-slate-700 rounded-full animate-spin" />
@@ -189,7 +206,7 @@ export function EmpleadosPage() {
               </div>
             )},
           ]}
-          data={empleados}
+          data={filtered}
           rowKey={(e) => e.idEmpleado}
           emptyMessage="No hay empleados registrados"
         />
