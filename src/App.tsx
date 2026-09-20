@@ -1,7 +1,7 @@
 import { AppProvider, useApp } from '@/context/AppContext';
 import { AuthProvider, useAuth, type Permission } from '@/context/AuthContext';
 import { CategoriasPage } from '@/features/categorias/CategoriasPage';
-import { ClientesPage } from '@/pages/ClientesPage';
+import { ClientesPage } from '@/features/clientes/ClientesPage';
 import { CrearAdminPage } from '@/features/usuarios/CrearAdminPage';
 import { DashboardPage } from '@/pages/DashboardPage';
 import { EmpleadosPage } from '@/features/empleados/EmpleadosPage';
