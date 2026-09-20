@@ -3,7 +3,7 @@ import { AuthProvider, useAuth, type Permission } from '@/context/AuthContext';
 import { CategoriasPage } from '@/features/categorias/CategoriasPage';
 import { ClientesPage } from '@/features/clientes/ClientesPage';
 import { CrearAdminPage } from '@/features/usuarios/CrearAdminPage';
-import { DashboardPage } from '@/pages/DashboardPage';
+import { DashboardPage } from '@/features/dashboard/DashboardPage';
 import { EmpleadosPage } from '@/features/empleados/EmpleadosPage';
 import { FacturasPage } from '@/features/facturas/FacturasPage';
 import { InformesPage } from '@/pages/InformesPage';
