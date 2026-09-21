@@ -6,7 +6,7 @@ import { CrearAdminPage } from '@/features/usuarios/CrearAdminPage';
 import { DashboardPage } from '@/features/dashboard/DashboardPage';
 import { EmpleadosPage } from '@/features/empleados/EmpleadosPage';
 import { FacturasPage } from '@/features/facturas/FacturasPage';
-import { InformesPage } from '@/pages/InformesPage';
+import { InformesPage } from '@/features/informes/InformesPage';
 import { Layout } from '@/components/Layout';
 import { LoginPage } from '@/pages/LoginPage';
 import { ProductosPage } from '@/features/productos/ProductosPage';
