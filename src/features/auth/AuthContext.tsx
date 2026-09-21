@@ -1,7 +1,9 @@
-import { createContext, useContext, useState, useEffect, type ReactNode } from 'react';
-import { setUnauthorizedHandler, ApiError } from '@/shared/api/httpClient';
-import { getToken, setToken, clearToken } from '@/features/auth/tokenStorage';
-import * as authApi from '@/features/auth/authApi';
+import { createContext, useContext, useState, useEffect, useRef, type ReactNode } from 'react';
+import { setUnauthorizedHandler, getErrorMessage } from '@/shared/api/httpClient';
+import { ApiError } from '@/shared/api/httpClient';
+import { getToken, setToken, clearToken } from '@/shared/api/tokenStorage';
+import { showToast } from '@/components/ui/Toast';
+import * as authApi from './authApi';
 
 export type Permission =
   | 'dashboard'
@@ -63,6 +65,11 @@ function buildAuthUser(strusuario: string, apiUser: { idEmpleado: number; nombre
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<AuthUser | null>(null);
   const [loading, setLoading] = useState(!!getToken());
+  const userRef = useRef<AuthUser | null>(null);
+
+  useEffect(() => {
+    userRef.current = user;
+  }, [user]);
 
   const signOut = () => {
     clearToken();
@@ -71,7 +78,16 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    setUnauthorizedHandler(signOut);
+    const handleUnauthorized = () => {
+      const hadUser = !!userRef.current;
+      clearToken();
+      localStorage.removeItem(USUARIO_KEY);
+      setUser(null);
+      if (hadUser) {
+        showToast('Tu sesión expiró. Inicia sesión de nuevo.', 'error');
+      }
+    };
+    setUnauthorizedHandler(handleUnauthorized);
 
     const token = getToken();
     if (!token) {
@@ -85,10 +101,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const strusuario = localStorage.getItem(USUARIO_KEY) ?? '';
         setUser(buildAuthUser(strusuario, apiUser));
       })
-      .catch(() => {
-        clearToken();
-        localStorage.removeItem(USUARIO_KEY);
-        setUser(null);
+      .catch((err) => {
+        if (err instanceof ApiError && err.status === 401) {
+          clearToken();
+          localStorage.removeItem(USUARIO_KEY);
+          setUser(null);
+        } else {
+          setUser(null);
+          showToast(getErrorMessage(err), 'error');
+        }
       })
       .finally(() => setLoading(false));
   }, []);
@@ -101,8 +122,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setUser(buildAuthUser(usuario, res.user));
       return { error: null };
     } catch (e) {
-      const message = e instanceof ApiError ? e.message : 'Error de conexión';
-      return { error: message };
+      return { error: getErrorMessage(e) };
     }
   };
 

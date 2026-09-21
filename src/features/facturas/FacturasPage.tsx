@@ -1,24 +1,20 @@
-import { useEffect, useState } from 'react';
-import { ApiError } from '@/shared/api/httpClient';
-import { useAuth } from '@/context/AuthContext';
-import * as facturasApi from './facturasApi';
-import * as clientesApi from '../clientes/clientesApi';
-import type { Catalogo, FacturaListItem, FacturaDetalle } from './types';
-import type { Cliente } from '../clientes/types';
+import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
+import { getErrorMessage as errMsg } from '@/shared/api/httpClient';
 import { Input, Select } from '@/components/ui/Input';
 import { Modal } from '@/components/ui/Modal';
-import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
-import { Table } from '@/components/ui/Table';
-import { Badge } from '@/components/ui/Badge';
-import { showToast } from '@/components/ui/Toast';
 import { Plus, FileText, Calendar, User, DollarSign, Eye, X } from 'lucide-react';
+import { showToast } from '@/components/ui/Toast';
+import { Table } from '@/components/ui/Table';
+import { useAuth } from '@/features/auth/AuthContext';
+import { useEffect, useState } from 'react';
+import * as clientesApi from '../clientes/clientesApi';
+import * as facturasApi from './facturasApi';
+import type { Catalogo, FacturaListItem, FacturaDetalle } from './types';
+import type { Cliente } from '../clientes/types';
 
 type LineaForm = { idProducto: number; cantidad: number };
-
-function errMsg(e: unknown): string {
-  return e instanceof ApiError ? e.message : 'Error de conexión';
-}
 
 function estadoBadgeVariant(idEstado: number): 'yellow' | 'green' | 'red' | 'gray' {
   if (idEstado === 1) return 'yellow';

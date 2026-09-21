@@ -1,5 +1,5 @@
 import { type ReactNode, useState } from 'react';
-import { useAuth, type Permission } from '@/context/AuthContext';
+import { useAuth, type Permission } from '@/features/auth/AuthContext';
 import { useApp, type View } from '@/context/AppContext';
 import { Button } from '@/components/ui/Button';
 import { HelpModal } from '@/components/HelpModal';

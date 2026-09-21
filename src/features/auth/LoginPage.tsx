@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useAuth } from '@/context/AuthContext';
+import { useAuth } from './AuthContext';
 import { Button } from '@/components/ui/Button';
 import { Input } from '@/components/ui/Input';
 import { Building2, Lock, User, LogIn } from 'lucide-react';
@@ -15,9 +15,12 @@ export function LoginPage() {
     e.preventDefault();
     setError(null);
     setLoading(true);
-    const { error } = await signIn(usuario, clave);
-    if (error) setError(error);
-    setLoading(false);
+    try {
+      const result = await signIn(usuario, clave);
+      if (result.error) setError(result.error);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -40,19 +43,23 @@ export function LoginPage() {
           <form onSubmit={handleSubmit} className="px-8 py-6 space-y-4">
             <Input
               label="Usuario"
-              placeholder="admin"
+              placeholder="Tu usuario"
               value={usuario}
               onChange={(e) => setUsuario(e.target.value)}
               icon={<User size={18} />}
+              autoComplete="username"
+              maxLength={50}
               required
             />
             <Input
               label="Contraseña"
               type="password"
-              placeholder="••••"
+              placeholder="Tu contraseña"
               value={clave}
               onChange={(e) => setClave(e.target.value)}
               icon={<Lock size={18} />}
+              autoComplete="current-password"
+              maxLength={50}
               required
             />
 
@@ -73,11 +80,10 @@ export function LoginPage() {
               )}
             </Button>
           </form>
-
         </div>
 
         <p className="text-center text-xs text-slate-400 mt-6">
-          Sistema de Facturación v2.0
+          Sistema de Facturación
         </p>
       </div>
     </div>

@@ -1,22 +1,18 @@
-import { useEffect, useState } from 'react';
-import { ApiError } from '@/shared/api/httpClient';
-import { useAuth } from '@/context/AuthContext';
+import { Button } from '@/components/ui/Button';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { formatDate } from '@/shared/utils/date';
+import { getErrorMessage as errMsg } from '@/shared/api/httpClient';
+import { Input, Select, Textarea } from '@/components/ui/Input';
+import { Modal } from '@/components/ui/Modal';
+import { Plus, Pencil, UserMinus, RotateCcw, UserCog, Mail, Phone, MapPin, Calendar, IdCard, Search } from 'lucide-react';
+import { showToast } from '@/components/ui/Toast';
+import { Table } from '@/components/ui/Table';
+import { useAuth } from '@/features/auth/AuthContext';
+import { useEffect, useState } from 'react';
 import * as empleadosApi from './empleadosApi';
 import * as rolesApi from '../roles/rolesApi';
 import type { Empleado } from './types';
 import type { Rol } from '../roles/types';
-import { Button } from '@/components/ui/Button';
-import { Input, Select, Textarea } from '@/components/ui/Input';
-import { Modal } from '@/components/ui/Modal';
-import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
-import { Table } from '@/components/ui/Table';
-import { showToast } from '@/components/ui/Toast';
-import { Plus, Pencil, UserMinus, RotateCcw, UserCog, Mail, Phone, MapPin, Calendar, IdCard, Search } from 'lucide-react';
-
-function errMsg(e: unknown): string {
-  return e instanceof ApiError ? e.message : 'Error de conexión';
-}
 
 export function EmpleadosPage() {
   const { user } = useAuth();
@@ -126,8 +122,8 @@ export function EmpleadosPage() {
       await empleadosApi.reactivarEmpleado(e.idEmpleado);
       showToast('Empleado reactivado');
       load();
-    } catch (e) {
-      showToast(errMsg(e), 'error');
+    } catch (err) {
+      showToast(errMsg(err), 'error');
     }
   }
 

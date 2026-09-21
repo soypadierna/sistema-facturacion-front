@@ -1,4 +1,4 @@
-import { getToken, clearToken } from "../../features/auth/tokenStorage";
+import { getToken, clearToken } from "./tokenStorage";
 
 export class ApiError extends Error {
   status: number;
@@ -6,6 +6,10 @@ export class ApiError extends Error {
     super(message);
     this.status = status;
   }
+}
+
+export function getErrorMessage(e: unknown): string {
+  return e instanceof ApiError ? e.message : "Error de conexión";
 }
 
 let unauthorizedHandler: (() => void) | null = null;

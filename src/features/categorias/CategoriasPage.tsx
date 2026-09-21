@@ -1,18 +1,15 @@
-import { useEffect, useState } from 'react';
 import { ApiError } from '@/shared/api/httpClient';
-import * as categoriasApi from './categoriasApi';
-import type { Categoria } from './types';
 import { Button } from '@/components/ui/Button';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
+import { getErrorMessage as errMsg } from '@/shared/api/httpClient';
 import { Input } from '@/components/ui/Input';
 import { Modal } from '@/components/ui/Modal';
-import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
-import { Table } from '@/components/ui/Table';
-import { showToast } from '@/components/ui/Toast';
 import { Plus, Pencil, Trash2, FolderTree } from 'lucide-react';
-
-function errMsg(e: unknown): string {
-  return e instanceof ApiError ? e.message : 'Error de conexión';
-}
+import { showToast } from '@/components/ui/Toast';
+import { Table } from '@/components/ui/Table';
+import { useEffect, useState } from 'react';
+import * as categoriasApi from './categoriasApi';
+import type { Categoria } from './types';
 
 export function CategoriasPage() {
   const [categorias, setCategorias] = useState<Categoria[]>([]);

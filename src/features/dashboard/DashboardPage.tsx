@@ -1,13 +1,9 @@
+import { getErrorMessage as errMsg } from '@/shared/api/httpClient';
+import { showToast } from '@/components/ui/Toast';
 import { useEffect, useState } from 'react';
-import { ApiError } from '@/shared/api/httpClient';
+import { Users, Package, FileText, UserCog, TrendingUp, DollarSign, AlertCircle } from 'lucide-react';
 import * as dashboardApi from './dashboardApi';
 import type { DashboardData } from './types';
-import { showToast } from '@/components/ui/Toast';
-import { Users, Package, FileText, UserCog, TrendingUp, DollarSign, AlertCircle } from 'lucide-react';
-
-function errMsg(e: unknown): string {
-  return e instanceof ApiError ? e.message : 'Error de conexión';
-}
 
 export function DashboardPage() {
   const [data, setData] = useState<DashboardData | null>(null);

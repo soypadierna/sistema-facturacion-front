@@ -1,17 +1,13 @@
-import { useState, useEffect } from 'react';
-import { ApiError } from '@/shared/api/httpClient';
-import * as usuariosApi from './usuariosApi';
-import type { Usuario } from './types';
 import { Button } from '@/components/ui/Button';
+import { getErrorMessage as errMsg } from '@/shared/api/httpClient';
 import { Input, Select } from '@/components/ui/Input';
 import { showToast } from '@/components/ui/Toast';
 import { UserPlus, User, Lock, CheckCircle, Eye, EyeOff, AlertTriangle } from 'lucide-react';
+import { useState, useEffect } from 'react';
+import * as usuariosApi from './usuariosApi';
+import type { Usuario } from './types';
 
 const USUARIO_REGEX = /^[A-Za-z0-9._-]{3,50}$/;
-
-function errMsg(e: unknown): string {
-  return e instanceof ApiError ? e.message : 'Error de conexión';
-}
 
 export function CrearAdminPage() {
   const [empleados, setEmpleados] = useState<Usuario[]>([]);

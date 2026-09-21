@@ -1,20 +1,16 @@
-import { useEffect, useState } from 'react';
-import { ApiError } from '@/shared/api/httpClient';
-import * as rolesApi from './rolesApi';
-import type { Rol } from './types';
 import { Button } from '@/components/ui/Button';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
+import { getErrorMessage as errMsg } from '@/shared/api/httpClient';
 import { Input } from '@/components/ui/Input';
 import { Modal } from '@/components/ui/Modal';
-import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
-import { Table } from '@/components/ui/Table';
-import { showToast } from '@/components/ui/Toast';
 import { Plus, Pencil, Trash2, Shield } from 'lucide-react';
+import { showToast } from '@/components/ui/Toast';
+import { Table } from '@/components/ui/Table';
+import { useEffect, useState } from 'react';
+import * as rolesApi from './rolesApi';
+import type { Rol } from './types';
 
 const SYSTEM_ROLE_IDS = [1, 2, 3, 4];
-
-function errMsg(e: unknown): string {
-  return e instanceof ApiError ? e.message : 'Error de conexión';
-}
 
 export function RolesPage() {
   const [roles, setRoles] = useState<Rol[]>([]);

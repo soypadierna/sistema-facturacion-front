@@ -1,24 +1,20 @@
-import { useEffect, useRef, useState } from 'react';
-import { ApiError } from '@/shared/api/httpClient';
-import * as productosApi from './productosApi';
-import * as categoriasApi from '../categorias/categoriasApi';
-import type { Producto } from './types';
-import type { Categoria } from '../categorias/types';
+import { Badge } from '@/components/ui/Badge';
 import { Button } from '@/components/ui/Button';
+import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
+import { getErrorMessage as errMsg } from '@/shared/api/httpClient';
 import { Input, Select } from '@/components/ui/Input';
 import { Modal } from '@/components/ui/Modal';
-import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
-import { Table } from '@/components/ui/Table';
-import { Badge } from '@/components/ui/Badge';
-import { showToast } from '@/components/ui/Toast';
 import { Plus, Pencil, Trash2, Search, Package, DollarSign, Boxes, Barcode, Upload, X } from 'lucide-react';
+import { showToast } from '@/components/ui/Toast';
+import { Table } from '@/components/ui/Table';
+import { useEffect, useRef, useState } from 'react';
+import * as categoriasApi from '../categorias/categoriasApi';
+import * as productosApi from './productosApi';
+import type { Categoria } from '../categorias/types';
+import type { Producto } from './types';
 
 const MAX_PHOTO_BYTES = 3 * 1024 * 1024;
 const ACCEPTED_TYPES = ['image/jpeg', 'image/png', 'image/webp'];
-
-function errMsg(e: unknown): string {
-  return e instanceof ApiError ? e.message : 'Error de conexión';
-}
 
 export function ProductosPage() {
   const [productos, setProductos] = useState<Producto[]>([]);

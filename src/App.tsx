@@ -1,5 +1,4 @@
-import { AppProvider, useApp } from '@/context/AppContext';
-import { AuthProvider, useAuth, type Permission } from '@/context/AuthContext';
+import { AuthProvider, useAuth, type Permission } from '@/features/auth/AuthContext';
 import { CategoriasPage } from '@/features/categorias/CategoriasPage';
 import { ClientesPage } from '@/features/clientes/ClientesPage';
 import { CrearAdminPage } from '@/features/usuarios/CrearAdminPage';
@@ -8,7 +7,7 @@ import { EmpleadosPage } from '@/features/empleados/EmpleadosPage';
 import { FacturasPage } from '@/features/facturas/FacturasPage';
 import { InformesPage } from '@/features/informes/InformesPage';
 import { Layout } from '@/components/Layout';
-import { LoginPage } from '@/pages/LoginPage';
+import { LoginPage } from '@/features/auth/LoginPage';
 import { ProductosPage } from '@/features/productos/ProductosPage';
 import { RolesPage } from '@/features/roles/RolesPage';
 import { ToastContainer } from '@/components/ui/Toast';
