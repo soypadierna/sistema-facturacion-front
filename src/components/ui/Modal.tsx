@@ -1,4 +1,5 @@
 import { type ReactNode } from 'react';
+import { createPortal } from 'react-dom';
 import { X } from 'lucide-react';
 
 type Props = {
@@ -19,7 +20,7 @@ const sizeClasses = {
 export function Modal({ open, onClose, title, children, size = 'md' }: Props) {
   if (!open) return null;
 
-  return (
+  return createPortal(
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       <div className="absolute inset-0 bg-slate-900/50 backdrop-blur-sm" onClick={onClose} />
       <div className={`relative w-full ${sizeClasses[size]} bg-white rounded-2xl shadow-2xl border border-slate-200 max-h-[90vh] flex flex-col`}>
@@ -36,6 +37,7 @@ export function Modal({ open, onClose, title, children, size = 'md' }: Props) {
           {children}
         </div>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }

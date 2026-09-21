@@ -1,3 +1,4 @@
+import { AppProvider, useApp } from '@/context/AppContext';
 import { AuthProvider, useAuth, type Permission } from '@/features/auth/AuthContext';
 import { CategoriasPage } from '@/features/categorias/CategoriasPage';
 import { ClientesPage } from '@/features/clientes/ClientesPage';
