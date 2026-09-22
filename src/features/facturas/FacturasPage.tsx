@@ -4,7 +4,8 @@ import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { getErrorMessage as errMsg } from '@/shared/api/httpClient';
 import { Input, Select } from '@/components/ui/Input';
 import { Modal } from '@/components/ui/Modal';
-import { Plus, FileText, Calendar, User, DollarSign, Eye, X } from 'lucide-react';
+import { handleNumericKeyDown, handleNumericPaste } from '@/shared/utils/numericInput';
+import { Plus, FileText, Calendar, User, DollarSign, Eye, Search, X } from 'lucide-react';
 import { showToast } from '@/components/ui/Toast';
 import { Table } from '@/components/ui/Table';
 import { useAuth } from '@/features/auth/AuthContext';
@@ -29,6 +30,7 @@ export function FacturasPage() {
   const [clientes, setClientes] = useState<Cliente[]>([]);
   const [catalogo, setCatalogo] = useState<Catalogo | null>(null);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState('');
 
   const [modalOpen, setModalOpen] = useState(false);
   const [viewOpen, setViewOpen] = useState(false);
@@ -62,6 +64,11 @@ export function FacturasPage() {
   }
 
   useEffect(() => { load(); }, []);
+
+  const filtered = facturas.filter((f) =>
+    String(f.idFactura).includes(search) ||
+    (f.cliente?.nombre ?? '').toLowerCase().includes(search.toLowerCase())
+  );
 
   function openNew() {
     setIdCliente('');
@@ -190,6 +197,16 @@ export function FacturasPage() {
         <Button onClick={openNew}><Plus size={18} /> Nueva Factura</Button>
       </div>
 
+      <div className="relative max-w-sm">
+        <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+        <input
+          placeholder="Buscar por número o cliente..."
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+          className="w-full rounded-lg border border-slate-300 bg-white pl-10 pr-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
+        />
+      </div>
+
       {loading ? (
         <div className="flex justify-center py-20">
           <div className="w-8 h-8 border-2 border-slate-300 border-t-slate-700 rounded-full animate-spin" />
@@ -220,7 +237,7 @@ export function FacturasPage() {
               </div>
             )},
           ]}
-          data={facturas}
+          data={filtered}
           rowKey={(f) => f.idFactura}
           emptyMessage="No hay facturas registradas"
         />
@@ -278,11 +295,12 @@ export function FacturasPage() {
                     <div className="w-24">
                       <label className="block text-xs text-slate-500 mb-1">Cant.</label>
                       <input
-                        type="number"
-                        min="1"
-                        max={prod?.stock ?? 1}
+                        type="text"
+                        inputMode="numeric"
                         value={l.cantidad}
-                        onChange={(e) => updateLinea(i, 'cantidad', e.target.value)}
+                        onChange={(e) => updateLinea(i, 'cantidad', e.target.value.replace(/\D/g, ''))}
+                        onKeyDown={handleNumericKeyDown}
+                        onPaste={handleNumericPaste}
                         className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
                       />
                     </div>
@@ -304,7 +322,7 @@ export function FacturasPage() {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <Input label="Descuento (%)" type="number" min="0" max="100" step="0.01" value={descuentoPct} onChange={(e) => setDescuentoPct(e.target.value)} icon={<DollarSign size={18} />} />
+            <Input label="Descuento (%)" type="number" min="0" max="100" step="0.01" value={descuentoPct} onChange={(e) => setDescuentoPct(e.target.value)} icon={<DollarSign size={18} />} className="no-spinner" />
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">IVA {impuestoPct}%</label>
               <div className="px-3.5 py-2.5 border border-slate-200 rounded-lg bg-slate-50 text-sm text-slate-600">

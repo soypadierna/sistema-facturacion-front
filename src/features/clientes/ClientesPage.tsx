@@ -1,9 +1,10 @@
 import { Button } from '@/components/ui/Button';
 import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { getErrorMessage as errMsg } from '@/shared/api/httpClient';
-import { Input } from '@/components/ui/Input';
+import { Input, Textarea } from '@/components/ui/Input';
+import { PhoneInput } from '@/components/ui/PhoneInput';
 import { Modal } from '@/components/ui/Modal';
-import { Plus, Pencil, Trash2, Search, Users, Mail, Phone, MapPin, IdCard } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, Users, Mail, IdCard } from 'lucide-react';
 import { showToast } from '@/components/ui/Toast';
 import { Table } from '@/components/ui/Table';
 import { useEffect, useState } from 'react';
@@ -137,7 +138,7 @@ export function ClientesPage() {
             { key: 'documento', label: 'Documento', render: (c) => c.documento ?? '-' },
             { key: 'email', label: 'Email', render: (c) => c.email ?? '-' },
             { key: 'telefono', label: 'Teléfono', render: (c) => c.telefono ?? '-' },
-            { key: 'direccion', label: 'Dirección', render: (c) => c.direccion ?? '-' },
+            { key: 'direccion', label: 'Dirección', render: (c) => <span title={c.direccion ?? ''}>{c.direccion ?? '-'}</span> },
             { key: 'actions', label: '', render: (c) => (
               <div className="flex items-center gap-1 justify-end">
                 <button onClick={() => openEdit(c)} title="Editar" aria-label="Editar" className="p-1.5 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors">
@@ -159,11 +160,11 @@ export function ClientesPage() {
         <form onSubmit={save} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input label="Nombre completo *" value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} icon={<Users size={18} />} maxLength={55} required />
-            <Input label="Documento" type="number" value={form.documento} onChange={(e) => setForm({ ...form, documento: e.target.value })} icon={<IdCard size={18} />} />
+            <Input label="Documento" numericOnly value={form.documento} onChange={(e) => setForm({ ...form, documento: e.target.value })} icon={<IdCard size={18} />} />
             <Input label="Email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} icon={<Mail size={18} />} maxLength={50} />
-            <Input label="Teléfono" value={form.telefono} onChange={(e) => setForm({ ...form, telefono: e.target.value })} icon={<Phone size={18} />} maxLength={30} />
-            <Input label="Dirección" value={form.direccion} onChange={(e) => setForm({ ...form, direccion: e.target.value })} icon={<MapPin size={18} />} maxLength={70} />
+            <PhoneInput label="Teléfono" value={form.telefono} onChange={(v) => setForm({ ...form, telefono: v })} maxLength={30} />
           </div>
+          <Textarea label="Dirección" rows={2} maxLength={70} value={form.direccion} onChange={(e) => setForm({ ...form, direccion: e.target.value })} />
           <div className="flex justify-end gap-2 pt-2">
             <Button type="button" variant="secondary" onClick={() => setModalOpen(false)}>Cancelar</Button>
             <Button type="submit" disabled={saving}>{saving ? 'Guardando...' : 'Guardar'}</Button>

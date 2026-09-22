@@ -213,20 +213,19 @@ export function ProductosPage() {
           columns={[
             { key: 'nombre', label: 'Producto', render: (p) => (
               <div className="flex items-center gap-2">
-                {p.fotoUrl ? (
-                  <img
-                    src={p.fotoUrl}
-                    alt={p.nombre}
-                    loading="lazy"
-                    onClick={() => { setImgViewing(p); setImgViewOpen(true); }}
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
-                    className="w-10 h-10 rounded-lg object-cover cursor-pointer"
-                  />
-                ) : (
-                  <div className="flex items-center justify-center w-10 h-10 bg-slate-100 rounded-lg">
-                    <Package size={15} className="text-slate-500" />
-                  </div>
-                )}
+                <div className="relative w-10 h-10 shrink-0 rounded-lg bg-slate-100 flex items-center justify-center overflow-hidden">
+                  <Package size={15} className="text-slate-500" />
+                  {p.fotoUrl && (
+                    <img
+                      src={p.fotoUrl}
+                      alt={p.nombre}
+                      loading="lazy"
+                      onClick={() => { setImgViewing(p); setImgViewOpen(true); }}
+                      onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+                      className="absolute inset-0 w-full h-full object-cover cursor-pointer"
+                    />
+                  )}
+                </div>
                 <div>
                   <p className="font-medium text-slate-800">{p.nombre}</p>
                   <p className="text-xs text-slate-400">{p.categoria?.descripcion ?? 'Sin categoría'}</p>
@@ -269,34 +268,40 @@ export function ProductosPage() {
               <option value="">Selecciona una categoría</option>
               {categorias.map((c) => <option key={c.id} value={c.id}>{c.descripcion}</option>)}
             </Select>
-            <Input label="Stock" type="number" min="0" value={form.stock} onChange={(e) => setForm({ ...form, stock: e.target.value })} icon={<Boxes size={18} />} />
-            <Input label="Precio de compra *" type="number" step="0.01" min="0.01" value={form.precioCompra} onChange={(e) => setForm({ ...form, precioCompra: e.target.value })} icon={<DollarSign size={18} />} required />
-            <Input label="Precio de venta *" type="number" step="0.01" min="0.01" value={form.precioVenta} onChange={(e) => setForm({ ...form, precioVenta: e.target.value })} icon={<DollarSign size={18} />} required />
+            <Input label="Stock" numericOnly value={form.stock} onChange={(e) => setForm({ ...form, stock: e.target.value })} icon={<Boxes size={18} />} />
+            <Input label="Precio de compra *" type="number" step="0.01" min="0.01" value={form.precioCompra} onChange={(e) => setForm({ ...form, precioCompra: e.target.value })} icon={<DollarSign size={18} />} className="no-spinner" required />
+            <Input label="Precio de venta *" type="number" step="0.01" min="0.01" value={form.precioVenta} onChange={(e) => setForm({ ...form, precioVenta: e.target.value })} icon={<DollarSign size={18} />} className="no-spinner" required />
           </div>
           <Input label="Detalle" value={form.detalle} onChange={(e) => setForm({ ...form, detalle: e.target.value })} maxLength={50} />
 
           <div>
             <label className="block text-sm font-medium text-slate-700 mb-1">Foto</label>
-            {fotoPreview ? (
-              <div className="flex items-center gap-3">
-                <img src={fotoPreview} alt="preview" className="w-20 h-20 rounded-lg object-cover border border-slate-200" />
+            <div className="flex items-center gap-3">
+              <div className="w-20 h-20 shrink-0 rounded-lg border border-slate-200 bg-slate-100 flex items-center justify-center overflow-hidden">
+                {fotoPreview ? (
+                  <img src={fotoPreview} alt="preview" className="w-full h-full object-cover" />
+                ) : (
+                  <Package size={24} className="text-slate-400" />
+                )}
+              </div>
+              {fotoPreview ? (
                 <Button type="button" variant="secondary" size="sm" onClick={handleRemoveFoto}>
                   <X size={14} /> Quitar foto
                 </Button>
-              </div>
-            ) : (
-              <label className="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-slate-300 rounded-lg py-6 cursor-pointer hover:border-slate-400 transition-colors">
-                <Upload size={20} className="text-slate-400" />
-                <span className="text-sm text-slate-500">Subir imagen (JPEG, PNG o WebP, máx. 3 MB)</span>
-                <input
-                  ref={fileInputRef}
-                  type="file"
-                  accept="image/jpeg,image/png,image/webp"
-                  onChange={handleFileChange}
-                  className="hidden"
-                />
-              </label>
-            )}
+              ) : (
+                <label className="flex-1 flex flex-col items-center justify-center gap-2 border-2 border-dashed border-slate-300 rounded-lg py-6 cursor-pointer hover:border-slate-400 transition-colors">
+                  <Upload size={20} className="text-slate-400" />
+                  <span className="text-sm text-slate-500">Subir imagen (JPEG, PNG o WebP, máx. 3 MB)</span>
+                  <input
+                    ref={fileInputRef}
+                    type="file"
+                    accept="image/jpeg,image/png,image/webp"
+                    onChange={handleFileChange}
+                    className="hidden"
+                  />
+                </label>
+              )}
+            </div>
           </div>
 
           <div className="flex justify-end gap-2 pt-2">

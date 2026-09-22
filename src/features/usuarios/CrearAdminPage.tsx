@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/Button';
 import { getErrorMessage as errMsg } from '@/shared/api/httpClient';
 import { Input, Select } from '@/components/ui/Input';
 import { showToast } from '@/components/ui/Toast';
-import { UserPlus, User, Lock, CheckCircle, Eye, EyeOff, AlertTriangle } from 'lucide-react';
+import { UserPlus, User, Lock, CheckCircle, AlertTriangle } from 'lucide-react';
 import { useState, useEffect } from 'react';
 import * as usuariosApi from './usuariosApi';
 import type { Usuario } from './types';
@@ -15,7 +15,6 @@ export function CrearAdminPage() {
   const [idempleado, setIdempleado] = useState('');
   const [strusuario, setStrusuario] = useState('');
   const [strclave, setStrclave] = useState('');
-  const [showClave, setShowClave] = useState(false);
   const [saving, setSaving] = useState(false);
   const [successMsg, setSuccessMsg] = useState<string | null>(null);
   const [usuarioError, setUsuarioError] = useState<string | null>(null);
@@ -149,27 +148,17 @@ export function CrearAdminPage() {
           </div>
 
           <div>
-            <div className="relative">
-              <Input
-                label="Contraseña *"
-                type={showClave ? 'text' : 'password'}
-                placeholder="Mínimo 6 caracteres"
-                value={strclave}
-                onChange={(e) => setStrclave(e.target.value)}
-                icon={<Lock size={18} />}
-                maxLength={50}
-                autoComplete="new-password"
-                required
-              />
-              <button
-                type="button"
-                onClick={() => setShowClave(!showClave)}
-                className="absolute right-3 top-9 text-slate-400 hover:text-slate-600"
-                tabIndex={-1}
-              >
-                {showClave ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
-            </div>
+            <Input
+              label="Contraseña *"
+              type="password"
+              placeholder="Mínimo 6 caracteres"
+              value={strclave}
+              onChange={(e) => setStrclave(e.target.value)}
+              icon={<Lock size={18} />}
+              maxLength={50}
+              autoComplete="new-password"
+              required
+            />
             {claveError && <p className="text-xs text-red-600 mt-1">{claveError}</p>}
           </div>
 

@@ -3,8 +3,9 @@ import { ConfirmDialog } from '@/components/ui/ConfirmDialog';
 import { formatDate } from '@/shared/utils/date';
 import { getErrorMessage as errMsg } from '@/shared/api/httpClient';
 import { Input, Select, Textarea } from '@/components/ui/Input';
+import { PhoneInput } from '@/components/ui/PhoneInput';
 import { Modal } from '@/components/ui/Modal';
-import { Plus, Pencil, UserMinus, RotateCcw, UserCog, Mail, Phone, MapPin, Calendar, IdCard, Search } from 'lucide-react';
+import { Plus, Pencil, UserMinus, RotateCcw, UserCog, Mail, MapPin, Calendar, IdCard, Search } from 'lucide-react';
 import { showToast } from '@/components/ui/Toast';
 import { Table } from '@/components/ui/Table';
 import { useAuth } from '@/features/auth/AuthContext';
@@ -134,23 +135,23 @@ export function EmpleadosPage() {
           <h3 className="text-xl font-bold text-slate-800">Gestión de Empleados</h3>
           <p className="text-sm text-slate-500 mt-1">{empleados.length} empleados registrados</p>
         </div>
-        <div className="flex items-center gap-3">
-          <label className="flex items-center gap-2 text-sm text-slate-600">
-            <input type="checkbox" checked={incluirRetirados} onChange={(e) => setIncluirRetirados(e.target.checked)} />
-            Mostrar retirados
-          </label>
-          <Button onClick={openNew}><Plus size={18} /> Nuevo Empleado</Button>
-        </div>
+        <Button onClick={openNew}><Plus size={18} /> Nuevo Empleado</Button>
       </div>
 
-      <div className="relative max-w-sm">
-        <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
-        <input
-          placeholder="Buscar por nombre, email o documento..."
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-lg border border-slate-300 bg-white pl-10 pr-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
-        />
+      <div className="flex items-center justify-between flex-wrap gap-3">
+        <div className="relative max-w-sm w-full sm:w-auto flex-1">
+          <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
+          <input
+            placeholder="Buscar por nombre, email o documento..."
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            className="w-full rounded-lg border border-slate-300 bg-white pl-10 pr-3.5 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-slate-400"
+          />
+        </div>
+        <label className="flex items-center gap-2 text-sm text-slate-600 shrink-0">
+          <input type="checkbox" checked={incluirRetirados} onChange={(e) => setIncluirRetirados(e.target.checked)} />
+          Mostrar retirados
+        </label>
       </div>
 
       {loading ? (
@@ -192,10 +193,12 @@ export function EmpleadosPage() {
                     <button onClick={() => openEdit(e)} title="Editar" aria-label="Editar" className="p-1.5 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors">
                       <Pencil size={16} />
                     </button>
-                    {e.idEmpleado !== user?.idempleado && (
+                    {e.idEmpleado !== user?.idempleado ? (
                       <button onClick={() => setRetiring(e)} title="Retirar" aria-label="Retirar" className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
                         <UserMinus size={16} />
                       </button>
+                    ) : (
+                      <span className="w-7 h-7 inline-block" />
                     )}
                   </>
                 )}
@@ -212,16 +215,16 @@ export function EmpleadosPage() {
         <form onSubmit={save} className="space-y-4">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             <Input label="Nombre completo *" value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} icon={<UserCog size={18} />} required />
-            <Input label="Documento *" type="number" value={form.documento} onChange={(e) => setForm({ ...form, documento: e.target.value })} icon={<IdCard size={18} />} required />
+            <Input label="Documento *" numericOnly value={form.documento} onChange={(e) => setForm({ ...form, documento: e.target.value })} icon={<IdCard size={18} />} required />
             <Input label="Email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} icon={<Mail size={18} />} />
-            <Input label="Teléfono" value={form.telefono} onChange={(e) => setForm({ ...form, telefono: e.target.value })} icon={<Phone size={18} />} />
-            <Input label="Dirección" value={form.direccion} onChange={(e) => setForm({ ...form, direccion: e.target.value })} icon={<MapPin size={18} />} />
+            <PhoneInput label="Teléfono" value={form.telefono} onChange={(v) => setForm({ ...form, telefono: v })} maxLength={50} />
             <Select label="Rol" value={form.idRol} onChange={(e) => setForm({ ...form, idRol: e.target.value })} disabled={editing?.idEmpleado === user?.idempleado}>
               <option value="">Sin rol asignado</option>
               {roles.map((r) => <option key={r.id} value={r.id}>{r.descripcion}</option>)}
             </Select>
             <Input label="Fecha de ingreso" type="date" value={form.ingreso} onChange={(e) => setForm({ ...form, ingreso: e.target.value })} icon={<Calendar size={18} />} />
           </div>
+          <Textarea label="Dirección" rows={2} value={form.direccion} onChange={(e) => setForm({ ...form, direccion: e.target.value })} />
           <Textarea label="Datos adicionales" value={form.datosAdicionales} onChange={(e) => setForm({ ...form, datosAdicionales: e.target.value })} />
           <div className="flex justify-end gap-2 pt-2">
             <Button type="button" variant="secondary" onClick={() => setModalOpen(false)}>Cancelar</Button>
