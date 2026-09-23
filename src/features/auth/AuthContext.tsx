@@ -1,9 +1,9 @@
 import { createContext, useContext, useState, useEffect, useRef, type ReactNode } from 'react';
-import { setUnauthorizedHandler, getErrorMessage } from '@/shared/api/httpClient';
-import { ApiError } from '@/shared/api/httpClient';
+import { setUnauthorizedHandler, getErrorMessage, ApiError } from '@/shared/api/httpClient';
 import { getToken, setToken, clearToken } from '@/shared/api/tokenStorage';
 import { showToast } from '@/components/ui/Toast';
 import * as authApi from './authApi';
+import type { ApiUser } from './types';
 
 export type Permission =
   | 'dashboard'
@@ -34,31 +34,20 @@ type AuthContextType = {
   hasPermission: (perm: Permission) => boolean;
 };
 
-const ADMIN_ROLE_ID = 1;
-
-const ROLE_PERMISSIONS: Record<number, Permission[]> = {
-  1: ['dashboard', 'clientes', 'productos', 'categorias', 'facturas', 'informes', 'empleados', 'roles', 'crear-admin'],
-  2: ['dashboard', 'clientes', 'facturas', 'informes'],
-  3: ['dashboard', 'productos'],
-  4: ['dashboard', 'clientes', 'productos', 'categorias', 'facturas', 'informes'],
-};
-
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 const USUARIO_KEY = 'dbfacturas_usuario';
 
-function buildAuthUser(strusuario: string, apiUser: { idEmpleado: number; nombre: string; rol: { id: number; descripcion: string } }): AuthUser {
+function buildAuthUser(strusuario: string, apiUser: ApiUser): AuthUser {
   const rolId = apiUser.rol?.id ?? null;
-  const isAdmin = rolId === ADMIN_ROLE_ID;
-  const permissions: Permission[] = rolId != null ? (ROLE_PERMISSIONS[rolId] ?? ['dashboard']) : ['dashboard'];
   return {
     strusuario,
     idempleado: apiUser.idEmpleado,
     nombreEmpleado: apiUser.nombre,
     idrolempleado: rolId,
     rolDescripcion: apiUser.rol?.descripcion ?? null,
-    isAdmin,
-    permissions,
+    isAdmin: rolId === 1,
+    permissions: (apiUser.permisos ?? []) as Permission[],
   };
 }
 
@@ -128,7 +117,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   const hasPermission = (perm: Permission) => {
     if (!user) return false;
-    if (user.isAdmin) return true;
     return user.permissions.includes(perm);
   };
 
