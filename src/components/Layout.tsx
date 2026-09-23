@@ -42,7 +42,7 @@ export function Layout({ children }: { children: ReactNode }) {
             <Building2 size={22} className="text-white" />
           </div>
           <div>
-            <h1 className="text-sm font-bold tracking-tight">DBFACTURAS</h1>
+            <h1 className="text-sm font-bold tracking-tight">CMD</h1>
             <p className="text-xs text-slate-400">Sistema de Facturación</p>
           </div>
         </div>

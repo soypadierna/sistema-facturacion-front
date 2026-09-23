@@ -12,7 +12,7 @@ export function HelpModal() {
           <div className="flex items-center justify-center w-20 h-20 bg-slate-800 rounded-2xl mb-4 shadow-lg">
             <Building2 size={40} className="text-white" />
           </div>
-          <h3 className="text-xl font-bold text-slate-800">Sistema de Facturación DBFACTURAS</h3>
+          <h3 className="text-xl font-bold text-slate-800">Sistema de Facturación CMD</h3>
           <p className="text-sm text-slate-500 mt-1">Versión 1.0.0</p>
         </div>
 
@@ -63,7 +63,7 @@ export function HelpModal() {
         </div>
 
         <p className="text-center text-xs text-slate-400">
-          © 2026 Sistema de Facturación DBFACTURAS. Todos los derechos reservados.
+          © 2026 Sistema de Facturación CMD. Todos los derechos reservados.
         </p>
       </div>
     </Modal>
