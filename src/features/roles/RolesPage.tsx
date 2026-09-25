@@ -140,31 +140,50 @@ export function RolesPage() {
       ) : (
         <Table
           columns={[
-            { key: 'descripcion', label: 'Descripción', render: (r) => (
-              <div className="flex items-center gap-2">
-                <div className="flex items-center justify-center w-8 h-8 bg-slate-100 rounded-lg">
-                  <Shield size={15} className="text-slate-500" />
+            {
+              key: 'descripcion', label: 'Descripción', render: (r) => (
+                <div className="flex items-center gap-2">
+                  <div className="flex items-center justify-center w-8 h-8 bg-slate-100 rounded-lg">
+                    <Shield size={15} className="text-slate-500" />
+                  </div>
+                  <span className="font-medium text-slate-800">{r.descripcion}</span>
                 </div>
-                <span className="font-medium text-slate-800">{r.descripcion}</span>
-              </div>
-            )},
-            { key: 'modulos', label: 'Módulos', render: (r) => (
-              <span className="text-sm text-slate-600">
-                {esGerente(r.id) ? 'Todos' : modulosResumen(r.permisos)}
-              </span>
-            )},
-            { key: 'actions', label: '', render: (r) => (
-              <div className="flex items-center gap-1 justify-end">
-                <button onClick={() => openEdit(r)} title="Editar" aria-label="Editar" className="p-1.5 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors">
-                  <Pencil size={16} />
-                </button>
-                {!isSistema(r.id) && (
-                  <button onClick={() => setDeleting(r)} title="Eliminar" aria-label="Eliminar" className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors">
-                    <Trash2 size={16} />
+              )
+            },
+            {
+              key: 'modulos', label: 'Módulos', render: (r) => (
+                <span className="text-sm text-slate-600">
+                  {esGerente(r.id) ? 'Todos' : modulosResumen(r.permisos)}
+                </span>
+              )
+            },
+            {
+              key: 'actions', label: '', render: (r) => (
+                <div className="flex items-center gap-1 justify-end">
+                  <button
+                    onClick={() => openEdit(r)}
+                    title="Editar"
+                    aria-label="Editar"
+                    className="p-1.5 text-slate-500 hover:bg-slate-100 rounded-lg transition-colors"
+                  >
+                    <Pencil size={16} />
                   </button>
-                )}
-              </div>
-            )},
+
+                  {!isSistema(r.id) ? (
+                    <button
+                      onClick={() => setDeleting(r)}
+                      title="Eliminar"
+                      aria-label="Eliminar"
+                      className="p-1.5 text-red-500 hover:bg-red-50 rounded-lg transition-colors"
+                    >
+                      <Trash2 size={16} />
+                    </button>
+                  ) : (
+                    <span className="w-7 h-7 inline-block" />
+                  )}
+                </div>
+              )
+            },
           ]}
           data={roles}
           rowKey={(r) => r.id}
