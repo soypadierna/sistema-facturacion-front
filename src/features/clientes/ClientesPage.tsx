@@ -107,12 +107,13 @@ export function ClientesPage() {
           <h3 className="text-xl font-bold text-slate-800">Gestión de Clientes</h3>
           <p className="text-sm text-slate-500 mt-1">{clientes.length} clientes registrados</p>
         </div>
-        <Button onClick={openNew}><Plus size={18} /> Nuevo Cliente</Button>
+        <Button onClick={openNew} data-testid="cliente-new-button" ><Plus size={18} /> Nuevo Cliente</Button>
       </div>
 
       <div className="relative max-w-sm">
         <Search size={18} className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400" />
         <input
+          data-testid="cliente-search"
           placeholder="Buscar por nombre, email o documento..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
@@ -132,7 +133,7 @@ export function ClientesPage() {
                 <div className="flex items-center justify-center w-8 h-8 bg-slate-100 rounded-full">
                   <Users size={15} className="text-slate-500" />
                 </div>
-                <span className="font-medium text-slate-800">{c.nombre}</span>
+                <span className="font-medium text-slate-800" data-testid="cliente-nombre-cell">{c.nombre}</span>
               </div>
             )},
             { key: 'documento', label: 'Documento', render: (c) => c.documento ?? '-' },
@@ -157,17 +158,17 @@ export function ClientesPage() {
       )}
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} title={editing ? 'Editar Cliente' : 'Nuevo Cliente'} size="lg">
-        <form onSubmit={save} className="space-y-4">
+        <form onSubmit={save} className="space-y-4" data-testid="cliente-form">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <Input label="Nombre completo *" value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} icon={<Users size={18} />} maxLength={55} required />
-            <Input label="Documento" numericOnly value={form.documento} onChange={(e) => setForm({ ...form, documento: e.target.value })} icon={<IdCard size={18} />} />
-            <Input label="Email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} icon={<Mail size={18} />} maxLength={50} />
-            <PhoneInput label="Teléfono" value={form.telefono} onChange={(v) => setForm({ ...form, telefono: v })} maxLength={30} />
+            <Input data-testid="cliente-nombre" label="Nombre completo *" value={form.nombre} onChange={(e) => setForm({ ...form, nombre: e.target.value })} icon={<Users size={18} />} maxLength={55} required />
+            <Input data-testid="cliente-documento" label="Documento" numericOnly value={form.documento} onChange={(e) => setForm({ ...form, documento: e.target.value })} icon={<IdCard size={18} />} />
+            <Input data-testid="cliente-email" label="Email" type="email" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} icon={<Mail size={18} />} maxLength={50} />
+            <PhoneInput data-testid="cliente-telefono" label="Teléfono" value={form.telefono} onChange={(v) => setForm({ ...form, telefono: v })} maxLength={30} />
           </div>
           <Textarea label="Dirección" rows={2} maxLength={70} value={form.direccion} onChange={(e) => setForm({ ...form, direccion: e.target.value })} />
           <div className="flex justify-end gap-2 pt-2">
             <Button type="button" variant="secondary" onClick={() => setModalOpen(false)}>Cancelar</Button>
-            <Button type="submit" disabled={saving}>{saving ? 'Guardando...' : 'Guardar'}</Button>
+            <Button type="submit" data-testid="cliente-submit" disabled={saving}>{saving ? 'Guardando...' : 'Guardar'}</Button>
           </div>
         </form>
       </Modal>

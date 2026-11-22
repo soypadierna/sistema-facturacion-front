@@ -194,7 +194,7 @@ export function FacturasPage() {
           <h3 className="text-xl font-bold text-slate-800">Gestión de Facturas</h3>
           <p className="text-sm text-slate-500 mt-1">{facturas.length} facturas emitidas</p>
         </div>
-        <Button onClick={openNew}><Plus size={18} /> Nueva Factura</Button>
+        <Button onClick={openNew} data-testid="factura-new-button"><Plus size={18} /> Nueva Factura</Button>
       </div>
 
       <div className="relative max-w-sm">
@@ -244,9 +244,9 @@ export function FacturasPage() {
       )}
 
       <Modal open={modalOpen} onClose={() => setModalOpen(false)} title="Nueva Factura" size="xl">
-        <form onSubmit={save} className="space-y-4">
+        <form onSubmit={save} className="space-y-4" data-testid="factura-form" data-catalog-ready={catalogo ? 'true' : 'false'}>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-            <Select label="Cliente *" value={idCliente} onChange={(e) => setIdCliente(e.target.value)} required>
+            <Select data-testid="factura-cliente" label="Cliente *" value={idCliente} onChange={(e) => setIdCliente(e.target.value)} required>
               <option value="">Selecciona un cliente</option>
               {clientes.map((c) => <option key={c.idCliente} value={c.idCliente}>{c.nombre}</option>)}
             </Select>
@@ -266,7 +266,7 @@ export function FacturasPage() {
           <div>
             <div className="flex items-center justify-between mb-2">
               <label className="text-sm font-medium text-slate-700">Productos</label>
-              <Button type="button" variant="secondary" size="sm" onClick={addLinea}><Plus size={14} /> Agregar</Button>
+              <Button type="button" data-testid="factura-add-line" variant="secondary" size="sm" onClick={addLinea}><Plus size={14} /> Agregar</Button>
             </div>
             <div className="space-y-2">
               {lineas.length === 0 && (
@@ -281,6 +281,7 @@ export function FacturasPage() {
                     <div className="flex-1">
                       <label className="block text-xs text-slate-500 mb-1">Producto</label>
                       <select
+                        data-testid={`factura-line-producto-${i}`}
                         value={l.idProducto || ''}
                         onChange={(e) => updateLinea(i, 'idProducto', e.target.value)}
                         className="w-full rounded-lg border border-slate-300 px-3 py-2 text-sm"
@@ -295,6 +296,7 @@ export function FacturasPage() {
                     <div className="w-24">
                       <label className="block text-xs text-slate-500 mb-1">Cant.</label>
                       <input
+                        data-testid={`factura-line-cantidad-${i}`}
                         type="text"
                         inputMode="numeric"
                         value={l.cantidad}
@@ -322,7 +324,7 @@ export function FacturasPage() {
           </div>
 
           <div className="grid grid-cols-2 gap-4">
-            <Input label="Descuento (%)" type="number" min="0" max="100" step="0.01" value={descuentoPct} onChange={(e) => setDescuentoPct(e.target.value)} icon={<DollarSign size={18} />} className="no-spinner" />
+            <Input data-testid="factura-descuento" label="Descuento (%)" type="number" min="0" max="100" step="0.01" value={descuentoPct} onChange={(e) => setDescuentoPct(e.target.value)} icon={<DollarSign size={18} />} className="no-spinner" />
             <div>
               <label className="block text-sm font-medium text-slate-700 mb-1">IVA {impuestoPct}%</label>
               <div className="px-3.5 py-2.5 border border-slate-200 rounded-lg bg-slate-50 text-sm text-slate-600">
@@ -342,14 +344,14 @@ export function FacturasPage() {
             </div>
             <div className="flex items-center justify-between">
               <span className="text-sm font-medium">Total estimado</span>
-              <span className="text-xl font-bold">${totalPreview.toLocaleString('es', { minimumFractionDigits: 2 })}</span>
+              <span className="text-xl font-bold" data-testid="factura-preview-total" data-value={totalPreview}>${totalPreview.toLocaleString('es', { minimumFractionDigits: 2 })}</span>
             </div>
             <p className="text-xs text-slate-400 mt-1">El total final lo confirma el servidor.</p>
           </div>
 
           <div className="flex justify-end gap-2 pt-2">
             <Button type="button" variant="secondary" onClick={() => setModalOpen(false)}>Cancelar</Button>
-            <Button type="submit" disabled={saving}>{saving ? 'Guardando...' : 'Crear Factura'}</Button>
+            <Button type="submit" data-testid="factura-submit" disabled={saving}>{saving ? 'Guardando...' : 'Crear Factura'}</Button>
           </div>
         </form>
       </Modal>
@@ -391,7 +393,7 @@ export function FacturasPage() {
             </div>
             <div className="p-3 bg-slate-800 rounded-lg text-white flex items-center justify-between">
               <span className="text-sm font-medium">Total</span>
-              <span className="text-lg font-bold">${Number(viewing.total ?? 0).toLocaleString('es')}</span>
+              <span className="text-lg font-bold" data-testid="factura-detail-total" data-value={viewing.total}>${Number(viewing.total ?? 0).toLocaleString('es')}</span>
             </div>
 
             <div className="border-t border-slate-200 pt-4">

@@ -43,6 +43,7 @@ export function LoginPage() {
           <form onSubmit={handleSubmit} className="px-8 py-6 space-y-4">
             <Input
               label="Usuario"
+              data-testid="login-usuario"
               placeholder="Tu usuario"
               value={usuario}
               onChange={(e) => setUsuario(e.target.value)}
@@ -53,6 +54,7 @@ export function LoginPage() {
             />
             <Input
               label="Contraseña"
+              data-testid="login-clave"
               type="password"
               placeholder="Tu contraseña"
               value={clave}
@@ -64,12 +66,12 @@ export function LoginPage() {
             />
 
             {error && (
-              <div className="px-4 py-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
+              <div data-testid="login-error" className="px-4 py-3 bg-red-50 border border-red-200 rounded-lg text-sm text-red-600">
                 {error}
               </div>
             )}
 
-            <Button type="submit" size="lg" disabled={loading} className="w-full">
+            <Button type="submit" data-testid="login-submit" size="lg" disabled={loading} className="w-full">
               {loading ? (
                 <span className="flex items-center gap-2">
                   <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />

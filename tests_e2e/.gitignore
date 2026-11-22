@@ -1,0 +1,5 @@
+venv/
+screenshots/
+reporte.html
+__pycache__/
+.pytest_cache/

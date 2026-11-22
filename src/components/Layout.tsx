@@ -49,7 +49,7 @@ export function Layout({ children }: { children: ReactNode }) {
 
         {user && (
           <div className="px-5 py-3 border-b border-slate-700/50">
-            <p className="text-sm font-medium text-white truncate">{user.nombreEmpleado}</p>
+            <p data-testid="user-name" className="text-sm font-medium text-white truncate">{user.nombreEmpleado}</p>
             <div className="flex items-center gap-2 mt-1">
               <Badge variant={user.isAdmin ? 'green' : 'blue'}>
                 {user.rolDescripcion ?? 'Sin rol'}
@@ -66,6 +66,7 @@ export function Layout({ children }: { children: ReactNode }) {
             return (
               <button
                 key={item.id}
+                data-testid={`nav-${item.id}`}
                 onClick={() => { setView(item.id); setSidebarOpen(false); }}
                 className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-sm font-medium transition-all ${
                   active
