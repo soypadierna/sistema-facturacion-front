@@ -2,6 +2,7 @@ import os
 import random
 import time
 from pathlib import Path
+from dotenv import load_dotenv
 
 import pytest
 import requests
@@ -13,6 +14,9 @@ from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 from webdriver_manager.chrome import ChromeDriverManager
+
+# Cargar variables del archivo .env de la raíz del proyecto
+load_dotenv(Path(__file__).resolve().parent.parent / ".env", override=True)
 
 BASE_URL = os.getenv("BASE_URL", "http://localhost:5173")
 API_URL = os.getenv("API_URL", "http://localhost:8000")

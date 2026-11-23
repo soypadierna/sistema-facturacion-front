@@ -1,0 +1,599 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="10" failures="4" skipped="0" tests="15" time="84.358" timestamp="2026-11-23T14:24:42.430532-05:00" hostname="Padierna"><testcase classname="tests.test_clientes" name="test_f2_01_cliente_valido_aparece_en_tabla" time="12.567"><error message="failed on setup with &quot;requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)&quot;">venv\Lib\site-packages\urllib3\connectionpool.py:540: in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\connection.py:638: in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:1430: in getresponse
+    response.begin()
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:331: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:292: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\socket.py:719: in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+venv\Lib\site-packages\requests\adapters.py:696: in send
+    resp = conn.urlopen(
+venv\Lib\site-packages\urllib3\connectionpool.py:847: in urlopen
+    retries = retries.increment(
+venv\Lib\site-packages\urllib3\util\retry.py:510: in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\util\util.py:39: in reraise
+    raise value
+venv\Lib\site-packages\urllib3\connectionpool.py:793: in urlopen
+    response = self._make_request(
+venv\Lib\site-packages\urllib3\connectionpool.py:542: in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+venv\Lib\site-packages\urllib3\connectionpool.py:373: in _raise_timeout
+    raise ReadTimeoutError(
+E   urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)
+
+During handling of the above exception, another exception occurred:
+conftest.py:122: in api
+    return ApiClient(API_URL, *credenciales)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+conftest.py:40: in __init__
+    r = self.http.post(f"{self.base_url}/auth/login", json={"usuario": usuario, "clave": clave}, timeout=TIMEOUT)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:712: in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:651: in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:784: in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\adapters.py:742: in send
+    raise ReadTimeout(e, request=request)
+E   requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)</error></testcase><testcase classname="tests.test_clientes" name="test_f2_02_nombre_obligatorio" time="0.001"><error message="failed on setup with &quot;requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)&quot;">venv\Lib\site-packages\urllib3\connectionpool.py:540: in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\connection.py:638: in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:1430: in getresponse
+    response.begin()
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:331: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:292: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\socket.py:719: in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+venv\Lib\site-packages\requests\adapters.py:696: in send
+    resp = conn.urlopen(
+venv\Lib\site-packages\urllib3\connectionpool.py:847: in urlopen
+    retries = retries.increment(
+venv\Lib\site-packages\urllib3\util\retry.py:510: in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\util\util.py:39: in reraise
+    raise value
+venv\Lib\site-packages\urllib3\connectionpool.py:793: in urlopen
+    response = self._make_request(
+venv\Lib\site-packages\urllib3\connectionpool.py:542: in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+venv\Lib\site-packages\urllib3\connectionpool.py:373: in _raise_timeout
+    raise ReadTimeoutError(
+E   urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)
+
+During handling of the above exception, another exception occurred:
+conftest.py:122: in api
+    return ApiClient(API_URL, *credenciales)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+conftest.py:40: in __init__
+    r = self.http.post(f"{self.base_url}/auth/login", json={"usuario": usuario, "clave": clave}, timeout=TIMEOUT)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:712: in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:651: in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:784: in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\adapters.py:742: in send
+    raise ReadTimeout(e, request=request)
+E   requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)</error></testcase><testcase classname="tests.test_clientes" name="test_f2_03_email_invalido_rechazado" time="0.000"><error message="failed on setup with &quot;requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)&quot;">venv\Lib\site-packages\urllib3\connectionpool.py:540: in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\connection.py:638: in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:1430: in getresponse
+    response.begin()
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:331: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:292: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\socket.py:719: in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+venv\Lib\site-packages\requests\adapters.py:696: in send
+    resp = conn.urlopen(
+venv\Lib\site-packages\urllib3\connectionpool.py:847: in urlopen
+    retries = retries.increment(
+venv\Lib\site-packages\urllib3\util\retry.py:510: in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\util\util.py:39: in reraise
+    raise value
+venv\Lib\site-packages\urllib3\connectionpool.py:793: in urlopen
+    response = self._make_request(
+venv\Lib\site-packages\urllib3\connectionpool.py:542: in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+venv\Lib\site-packages\urllib3\connectionpool.py:373: in _raise_timeout
+    raise ReadTimeoutError(
+E   urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)
+
+During handling of the above exception, another exception occurred:
+conftest.py:122: in api
+    return ApiClient(API_URL, *credenciales)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+conftest.py:40: in __init__
+    r = self.http.post(f"{self.base_url}/auth/login", json={"usuario": usuario, "clave": clave}, timeout=TIMEOUT)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:712: in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:651: in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:784: in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\adapters.py:742: in send
+    raise ReadTimeout(e, request=request)
+E   requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)</error></testcase><testcase classname="tests.test_clientes" name="test_f2_04_documento_duplicado_muestra_error" time="0.000"><error message="failed on setup with &quot;requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)&quot;">venv\Lib\site-packages\urllib3\connectionpool.py:540: in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\connection.py:638: in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:1430: in getresponse
+    response.begin()
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:331: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:292: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\socket.py:719: in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+venv\Lib\site-packages\requests\adapters.py:696: in send
+    resp = conn.urlopen(
+venv\Lib\site-packages\urllib3\connectionpool.py:847: in urlopen
+    retries = retries.increment(
+venv\Lib\site-packages\urllib3\util\retry.py:510: in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\util\util.py:39: in reraise
+    raise value
+venv\Lib\site-packages\urllib3\connectionpool.py:793: in urlopen
+    response = self._make_request(
+venv\Lib\site-packages\urllib3\connectionpool.py:542: in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+venv\Lib\site-packages\urllib3\connectionpool.py:373: in _raise_timeout
+    raise ReadTimeoutError(
+E   urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)
+
+During handling of the above exception, another exception occurred:
+conftest.py:122: in api
+    return ApiClient(API_URL, *credenciales)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+conftest.py:40: in __init__
+    r = self.http.post(f"{self.base_url}/auth/login", json={"usuario": usuario, "clave": clave}, timeout=TIMEOUT)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:712: in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:651: in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:784: in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\adapters.py:742: in send
+    raise ReadTimeout(e, request=request)
+E   requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)</error></testcase><testcase classname="tests.test_clientes" name="test_f2_05_cliente_solo_nombre_se_crea" time="0.000"><error message="failed on setup with &quot;requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)&quot;">venv\Lib\site-packages\urllib3\connectionpool.py:540: in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\connection.py:638: in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:1430: in getresponse
+    response.begin()
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:331: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:292: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\socket.py:719: in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+venv\Lib\site-packages\requests\adapters.py:696: in send
+    resp = conn.urlopen(
+venv\Lib\site-packages\urllib3\connectionpool.py:847: in urlopen
+    retries = retries.increment(
+venv\Lib\site-packages\urllib3\util\retry.py:510: in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\util\util.py:39: in reraise
+    raise value
+venv\Lib\site-packages\urllib3\connectionpool.py:793: in urlopen
+    response = self._make_request(
+venv\Lib\site-packages\urllib3\connectionpool.py:542: in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+venv\Lib\site-packages\urllib3\connectionpool.py:373: in _raise_timeout
+    raise ReadTimeoutError(
+E   urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)
+
+During handling of the above exception, another exception occurred:
+conftest.py:122: in api
+    return ApiClient(API_URL, *credenciales)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+conftest.py:40: in __init__
+    r = self.http.post(f"{self.base_url}/auth/login", json={"usuario": usuario, "clave": clave}, timeout=TIMEOUT)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:712: in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:651: in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:784: in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\adapters.py:742: in send
+    raise ReadTimeout(e, request=request)
+E   requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)</error></testcase><testcase classname="tests.test_facturas" name="test_f3_01_total_con_descuento_e_iva" time="0.000"><error message="failed on setup with &quot;requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)&quot;">venv\Lib\site-packages\urllib3\connectionpool.py:540: in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\connection.py:638: in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:1430: in getresponse
+    response.begin()
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:331: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:292: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\socket.py:719: in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+venv\Lib\site-packages\requests\adapters.py:696: in send
+    resp = conn.urlopen(
+venv\Lib\site-packages\urllib3\connectionpool.py:847: in urlopen
+    retries = retries.increment(
+venv\Lib\site-packages\urllib3\util\retry.py:510: in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\util\util.py:39: in reraise
+    raise value
+venv\Lib\site-packages\urllib3\connectionpool.py:793: in urlopen
+    response = self._make_request(
+venv\Lib\site-packages\urllib3\connectionpool.py:542: in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+venv\Lib\site-packages\urllib3\connectionpool.py:373: in _raise_timeout
+    raise ReadTimeoutError(
+E   urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)
+
+During handling of the above exception, another exception occurred:
+conftest.py:122: in api
+    return ApiClient(API_URL, *credenciales)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+conftest.py:40: in __init__
+    r = self.http.post(f"{self.base_url}/auth/login", json={"usuario": usuario, "clave": clave}, timeout=TIMEOUT)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:712: in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:651: in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:784: in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\adapters.py:742: in send
+    raise ReadTimeout(e, request=request)
+E   requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)</error></testcase><testcase classname="tests.test_facturas" name="test_f3_02_stock_baja_la_cantidad_vendida" time="0.000"><error message="failed on setup with &quot;requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)&quot;">venv\Lib\site-packages\urllib3\connectionpool.py:540: in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\connection.py:638: in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:1430: in getresponse
+    response.begin()
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:331: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:292: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\socket.py:719: in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+venv\Lib\site-packages\requests\adapters.py:696: in send
+    resp = conn.urlopen(
+venv\Lib\site-packages\urllib3\connectionpool.py:847: in urlopen
+    retries = retries.increment(
+venv\Lib\site-packages\urllib3\util\retry.py:510: in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\util\util.py:39: in reraise
+    raise value
+venv\Lib\site-packages\urllib3\connectionpool.py:793: in urlopen
+    response = self._make_request(
+venv\Lib\site-packages\urllib3\connectionpool.py:542: in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+venv\Lib\site-packages\urllib3\connectionpool.py:373: in _raise_timeout
+    raise ReadTimeoutError(
+E   urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)
+
+During handling of the above exception, another exception occurred:
+conftest.py:122: in api
+    return ApiClient(API_URL, *credenciales)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+conftest.py:40: in __init__
+    r = self.http.post(f"{self.base_url}/auth/login", json={"usuario": usuario, "clave": clave}, timeout=TIMEOUT)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:712: in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:651: in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:784: in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\adapters.py:742: in send
+    raise ReadTimeout(e, request=request)
+E   requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)</error></testcase><testcase classname="tests.test_facturas" name="test_f3_03_cantidad_mayor_al_stock_no_crea" time="0.000"><error message="failed on setup with &quot;requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)&quot;">venv\Lib\site-packages\urllib3\connectionpool.py:540: in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\connection.py:638: in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:1430: in getresponse
+    response.begin()
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:331: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:292: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\socket.py:719: in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+venv\Lib\site-packages\requests\adapters.py:696: in send
+    resp = conn.urlopen(
+venv\Lib\site-packages\urllib3\connectionpool.py:847: in urlopen
+    retries = retries.increment(
+venv\Lib\site-packages\urllib3\util\retry.py:510: in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\util\util.py:39: in reraise
+    raise value
+venv\Lib\site-packages\urllib3\connectionpool.py:793: in urlopen
+    response = self._make_request(
+venv\Lib\site-packages\urllib3\connectionpool.py:542: in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+venv\Lib\site-packages\urllib3\connectionpool.py:373: in _raise_timeout
+    raise ReadTimeoutError(
+E   urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)
+
+During handling of the above exception, another exception occurred:
+conftest.py:122: in api
+    return ApiClient(API_URL, *credenciales)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+conftest.py:40: in __init__
+    r = self.http.post(f"{self.base_url}/auth/login", json={"usuario": usuario, "clave": clave}, timeout=TIMEOUT)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:712: in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:651: in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:784: in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\adapters.py:742: in send
+    raise ReadTimeout(e, request=request)
+E   requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)</error></testcase><testcase classname="tests.test_facturas" name="test_f3_05_sin_productos_no_crea" time="0.000"><error message="failed on setup with &quot;requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)&quot;">venv\Lib\site-packages\urllib3\connectionpool.py:540: in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\connection.py:638: in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:1430: in getresponse
+    response.begin()
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:331: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:292: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\socket.py:719: in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+venv\Lib\site-packages\requests\adapters.py:696: in send
+    resp = conn.urlopen(
+venv\Lib\site-packages\urllib3\connectionpool.py:847: in urlopen
+    retries = retries.increment(
+venv\Lib\site-packages\urllib3\util\retry.py:510: in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\util\util.py:39: in reraise
+    raise value
+venv\Lib\site-packages\urllib3\connectionpool.py:793: in urlopen
+    response = self._make_request(
+venv\Lib\site-packages\urllib3\connectionpool.py:542: in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+venv\Lib\site-packages\urllib3\connectionpool.py:373: in _raise_timeout
+    raise ReadTimeoutError(
+E   urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)
+
+During handling of the above exception, another exception occurred:
+conftest.py:122: in api
+    return ApiClient(API_URL, *credenciales)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+conftest.py:40: in __init__
+    r = self.http.post(f"{self.base_url}/auth/login", json={"usuario": usuario, "clave": clave}, timeout=TIMEOUT)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:712: in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:651: in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:784: in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\adapters.py:742: in send
+    raise ReadTimeout(e, request=request)
+E   requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)</error></testcase><testcase classname="tests.test_facturas" name="test_f3_08_cantidad_igual_al_stock_deja_stock_en_cero" time="0.000"><error message="failed on setup with &quot;requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)&quot;">venv\Lib\site-packages\urllib3\connectionpool.py:540: in _make_request
+    response = conn.getresponse()
+               ^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\connection.py:638: in getresponse
+    httplib_response = super().getresponse()
+                       ^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:1430: in getresponse
+    response.begin()
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:331: in begin
+    version, status, reason = self._read_status()
+                              ^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\http\client.py:292: in _read_status
+    line = str(self.fp.readline(_MAXLINE + 1), "iso-8859-1")
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Users\soypa\AppData\Local\Programs\Python\Python313\Lib\socket.py:719: in readinto
+    return self._sock.recv_into(b)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   TimeoutError: timed out
+
+The above exception was the direct cause of the following exception:
+venv\Lib\site-packages\requests\adapters.py:696: in send
+    resp = conn.urlopen(
+venv\Lib\site-packages\urllib3\connectionpool.py:847: in urlopen
+    retries = retries.increment(
+venv\Lib\site-packages\urllib3\util\retry.py:510: in increment
+    raise reraise(type(error), error, _stacktrace)
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\urllib3\util\util.py:39: in reraise
+    raise value
+venv\Lib\site-packages\urllib3\connectionpool.py:793: in urlopen
+    response = self._make_request(
+venv\Lib\site-packages\urllib3\connectionpool.py:542: in _make_request
+    self._raise_timeout(err=e, url=url, timeout_value=read_timeout)
+venv\Lib\site-packages\urllib3\connectionpool.py:373: in _raise_timeout
+    raise ReadTimeoutError(
+E   urllib3.exceptions.ReadTimeoutError: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)
+
+During handling of the above exception, another exception occurred:
+conftest.py:122: in api
+    return ApiClient(API_URL, *credenciales)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+conftest.py:40: in __init__
+    r = self.http.post(f"{self.base_url}/auth/login", json={"usuario": usuario, "clave": clave}, timeout=TIMEOUT)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:712: in post
+    return self.request("POST", url, data=data, json=json, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:651: in request
+    resp = self.send(prep, **send_kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\sessions.py:784: in send
+    r = adapter.send(request, **kwargs)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\requests\adapters.py:742: in send
+    raise ReadTimeout(e, request=request)
+E   requests.exceptions.ReadTimeout: HTTPConnectionPool(host='localhost', port=8000): Read timed out. (read timeout=10)</error></testcase><testcase classname="tests.test_login" name="test_f1_01_login_valido_entra_al_dashboard" time="17.978"><failure message="selenium.common.exceptions.TimeoutException: Message: &#10;Stacktrace:&#10;&#09;chromedriver!GetHandleVerifier [0x7ff697300f25+4705]&#10;&#09;chromedriver!(No symbol) [0x7ff697201dd0]&#10;&#09;chromedriver!(No symbol) [0x7ff697083433]&#10;&#09;chromedriver!GetHandleVerifier [0x7ff6978c5ff1+5c97d1]&#10;&#09;chromedriver!GetHandleVerifier [0x7ff6978c624c+5c9a2c]&#10;&#09;chromedriver!GetHandleVerifier [0x7ff6978f4647+5f7e27]&#10;&#09;chromedriver!(No symbol) [0x7ff6970b5b01]&#10;&#09;chromedriver!(No symbol) [0x7ff69709bea1]&#10;[+11 more lines; full report in element text]">tests\test_login.py:11: in test_f1_01_login_valido_entra_al_dashboard
+    page.wait_dashboard()
+pages\login_page.py:23: in wait_dashboard
+    return self.visible("user-name")
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+pages\base_page.py:23: in visible
+    return self.wait().until(EC.visibility_of_element_located(self.loc(testid)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+venv\Lib\site-packages\selenium\webdriver\support\wait.py:121: in until
+    raise TimeoutException(message, screen, stacktrace)
+E   selenium.common.exceptions.TimeoutException: Message: 
+E   Stacktrace:
+E   	chromedriver!GetHandleVerifier [0x7ff697300f25+4705]
+E   	chromedriver!(No symbol) [0x7ff697201dd0]
+E   	chromedriver!(No symbol) [0x7ff697083433]
+E   	chromedriver!GetHandleVerifier [0x7ff6978c5ff1+5c97d1]
+E   	chromedriver!GetHandleVerifier [0x7ff6978c624c+5c9a2c]
+E   	chromedriver!GetHandleVerifier [0x7ff6978f4647+5f7e27]
+E   	chromedriver!(No symbol) [0x7ff6970b5b01]
+E   	chromedriver!(No symbol) [0x7ff69709bea1]
+E   	chromedriver!(No symbol) [0x7ff69709d1d3]
+E   	chromedriver!GetHandleVerifier [0x7ff6977a0f4f+4a472f]
+E   	chromedriver!GetHandleVerifier [0x7ff6977c7678+4cae58]
+E   	chromedriver!GetHandleVerifier [0x7ff6977baf68+4be748]
+E   	chromedriver!GetHandleVerifier [0x7ff69741e64e+121e2e]
+E   	chromedriver!(No symbol) [0x7ff697211713]
+E   	chromedriver!(No symbol) [0x7ff69720c324]
+E   	chromedriver!(No symbol) [0x7ff69720c4b4]
+E   	chromedriver!(No symbol) [0x7ff6971f50bc]
+E   	KERNEL32!BaseThreadInitThunk [0x7ff8389edda7+17]
+E   	ntdll!RtlUserThreadStart [0x7ff83a459c5c+2c]</failure></testcase><testcase classname="tests.test_login" name="test_f1_02_clave_incorrecta_muestra_mensaje" time="15.357"><failure message="selenium.common.exceptions.TimeoutException: Message:">tests\test_login.py:18: in test_f1_02_clave_incorrecta_muestra_mensaje
+    page.wait_error_containing(GENERIC_ERROR)
+pages\login_page.py:20: in wait_error_containing
+    self.wait().until(lambda d: text in self._error_now())
+venv\Lib\site-packages\selenium\webdriver\support\wait.py:121: in until
+    raise TimeoutException(message, screen, stacktrace)
+E   selenium.common.exceptions.TimeoutException: Message:</failure></testcase><testcase classname="tests.test_login" name="test_f1_03_usuario_inexistente_muestra_mismo_mensaje" time="15.438"><failure message="selenium.common.exceptions.TimeoutException: Message:">tests\test_login.py:25: in test_f1_03_usuario_inexistente_muestra_mismo_mensaje
+    page.wait_error_containing(GENERIC_ERROR)
+pages\login_page.py:20: in wait_error_containing
+    self.wait().until(lambda d: text in self._error_now())
+venv\Lib\site-packages\selenium\webdriver\support\wait.py:121: in until
+    raise TimeoutException(message, screen, stacktrace)
+E   selenium.common.exceptions.TimeoutException: Message:</failure></testcase><testcase classname="tests.test_login" name="test_f1_04_campos_vacios_no_envia" time="4.994" /><testcase classname="tests.test_login" name="test_f1_05_bloqueo_tras_5_fallos" time="15.400"><failure message="selenium.common.exceptions.TimeoutException: Message:">tests\test_login.py:41: in test_f1_05_bloqueo_tras_5_fallos
+    page.wait_error_containing(GENERIC_ERROR)
+pages\login_page.py:20: in wait_error_containing
+    self.wait().until(lambda d: text in self._error_now())
+venv\Lib\site-packages\selenium\webdriver\support\wait.py:121: in until
+    raise TimeoutException(message, screen, stacktrace)
+E   selenium.common.exceptions.TimeoutException: Message:</failure></testcase></testsuite></testsuites>
